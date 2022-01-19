@@ -1,0 +1,16 @@
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication.deps.json
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication.runtimeconfig.json
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication.runtimeconfig.dev.json
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication.dll
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/ref/BankingApplication.dll
+/home/jyot/C#/bankingapplication/src/BankingApplication/bin/Debug/net5.0/BankingApplication.pdb
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.csproj.AssemblyReference.cache
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.GeneratedMSBuildEditorConfig.editorconfig
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.AssemblyInfoInputs.cache
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.AssemblyInfo.cs
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.csproj.CoreCompileInputs.cache
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.dll
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/ref/BankingApplication.dll
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.pdb
+/home/jyot/C#/bankingapplication/src/BankingApplication/obj/Debug/net5.0/BankingApplication.genruntimeconfig.cache
