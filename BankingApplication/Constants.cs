@@ -2,7 +2,8 @@ namespace BankingApplication
 {
     class Constants
     {
-        public static int TRANS_PER_HOUR = 4;
-        public static int DEBITED_AMOUNT_PERHOUR = 200000;
+        public static int TRANS_PER_UNIT = 4;
+        public static int DEBITED_AMOUNT_PERUNIT = 200000;
+        public static double SECONDS_PER_UNIT = 60.0;
     }
 }

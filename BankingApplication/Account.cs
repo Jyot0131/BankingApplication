@@ -32,6 +32,7 @@ namespace BankingApplication
                 return typeofaccount;
             }
         }
+        
         public String Account_No
         {
             get
@@ -48,6 +49,7 @@ namespace BankingApplication
             }
         }
 
+
         public void Credit(int val)
         {
             if(val%100 != 0)
@@ -56,9 +58,9 @@ namespace BankingApplication
             if(totaltrans == 0)
                 fourtransperhour = DateTime.Now;
 
-            if(totaltrans == Constants.TRANS_PER_HOUR)
+            if(totaltrans == Constants.TRANS_PER_UNIT)
             {
-                if((DateTime.Now.Subtract(fourtransperhour).TotalSeconds) < 60.0)
+                if((DateTime.Now.Subtract(fourtransperhour).TotalSeconds) < Constants.SECONDS_PER_UNIT)
                 {
                     throw new Exception("Transaction limit is exceeded, please try again after some time !");
                 }
@@ -72,8 +74,10 @@ namespace BankingApplication
             totaltrans += 1;
             transations.Add($"{transaction_id++}.\t+{val}\tC\t{DateTime.Now}");
             System.Console.WriteLine($"Account is Credited with {val}, updated balance is {balance}.");
-            System.Console.WriteLine($"Total Transaction {totaltrans}");
+            System.Console.WriteLine($"Transaction {totaltrans}");
         }
+
+
 
         public void Dedit(int val)
         {
@@ -95,37 +99,29 @@ namespace BankingApplication
             if(totaldebitedamount == 0)
                 debit200kperhour = DateTime.Now;
 
-            if(totaltrans == Constants.TRANS_PER_HOUR)
+            if(totaltrans == Constants.TRANS_PER_UNIT)
             {
-                if((DateTime.Now.Subtract(fourtransperhour).TotalSeconds) < 60.0)
+                if((DateTime.Now.Subtract(fourtransperhour).TotalSeconds) < Constants.SECONDS_PER_UNIT)
                 {
-                    //System.Console.WriteLine("Transaction limit is exceeded, please try again after some time !");
-                    //one = false;
-                    //return;
                     throw new Exception("Transaction limit is exceeded, please try again after some time !");
                 }
                 else
                 {
                     totaltrans = 0;
                     fourtransperhour = DateTime.Now;
-                    //one = true;
                 }
             }
 
-            if(totaldebitedamount+val > Constants.DEBITED_AMOUNT_PERHOUR)
+            if(totaldebitedamount+val > Constants.DEBITED_AMOUNT_PERUNIT)
             {
-                if((DateTime.Now.Subtract(debit200kperhour).TotalSeconds) < 60.0)
+                if((DateTime.Now.Subtract(debit200kperhour).TotalSeconds) < Constants.SECONDS_PER_UNIT)
                 {
-                    //System.Console.WriteLine("Debit amount limit 200k per hour is exceeded, please try again after sometime !");
-                    //two = false;
-                    //return;
-                    throw new Exception("Debit amount limit 200k per hour is exceeded, please try again after sometime !");
+                    throw new Exception("Debit amount limit 200k per hour is exceeded !");
                 }
                 else
                 {
                     totaldebitedamount = 0;
                     debit200kperhour = DateTime.Now;
-                    //two = true;
                 }
             }
             
@@ -134,27 +130,27 @@ namespace BankingApplication
             totaltrans += 1;
             transations.Add($"{transaction_id++}.\t-{val}\tD\t{DateTime.Now}");
             System.Console.WriteLine($"Account is Debited with {val}, updated balance is {balance}.");
-            System.Console.WriteLine($"Total Transaction {totaltrans}");
+            System.Console.WriteLine($"Transaction {totaltrans}");
 
         }
+
+
 
         public void DisplayBalance()
         {
             System.Console.WriteLine($"Available balance with account {Account_No} is {Balance}.");
         }
 
+
+
         public void DisplayAccountStatement()
         {
             if(transations.Count == 0)
-            {
-                System.Console.WriteLine("Transaction records not found !");
-                return;
-            }
+                throw new Exception("Transaction records not found !");
+
             System.Console.WriteLine($"Id\tAmount\tC/D\tTime");
             foreach(var transaction in transations)
-            {
                 System.Console.WriteLine(transaction);
-            }
         }
     }
 }
