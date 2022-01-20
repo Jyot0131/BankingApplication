@@ -58,18 +58,19 @@ namespace BankingApplication
 
         private static void CreateCustomersAndAccounts()
         {
-            var newcustomer = bank.CreateNewCustomer('S');
-            bank.CreateNewAcoount(newcustomer,'C');
-            bank.CreateNewAcoount(newcustomer,'S');
-            bank.CreateNewAcoount(newcustomer,'S');
+            var newcustomer = bank.CreateNewCustomer();
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'C');
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'S');
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'S');
         
-            newcustomer = bank.CreateNewCustomer('S');
-            bank.CreateNewAcoount(newcustomer,'c');
+            newcustomer = bank.CreateNewCustomer();
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'C');
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'S');
 
-            newcustomer = bank.CreateNewCustomer('C');
-            bank.CreateNewAcoount(newcustomer,'S');
-            bank.CreateNewAcoount(newcustomer,'C');
-            bank.CreateNewAcoount(newcustomer,'S');
+            newcustomer = bank.CreateNewCustomer();
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'S');
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'C');
+            bank.CreateNewAcoount(newcustomer.Customer_ID,'S');
         }
 
         private static void case1()
@@ -77,7 +78,13 @@ namespace BankingApplication
             System.Console.WriteLine("Enter Account Id");
             var acno = System.Console.ReadLine();
             System.Console.WriteLine("Enter amount");
-            int val = int.Parse(System.Console.ReadLine());
+            int val;
+            bool success = int.TryParse(System.Console.ReadLine(), out val);
+            if(!success)
+            {
+                System.Console.WriteLine("Invalid amount !");
+                return;
+            }
             try
             {
                 bank.FindAccount(acno).Credit(val);
@@ -94,7 +101,13 @@ namespace BankingApplication
             System.Console.WriteLine("Enter Account Id");
             string acno = System.Console.ReadLine();
             System.Console.WriteLine("Enter amount");
-            int val = int.Parse(System.Console.ReadLine());
+            int val;
+            bool success = int.TryParse(System.Console.ReadLine(), out val);
+            if(!success)
+            {
+                System.Console.WriteLine("Invalid amount !");
+                return;
+            }
             try
             {
                 bank.FindAccount(acno).Dedit(val);

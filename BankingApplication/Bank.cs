@@ -6,12 +6,12 @@ namespace BankingApplication
 {
     public class Bank
     {
-        private Dictionary<Account,Customer> accounts = new Dictionary<Account,Customer>();
-        public Dictionary<Account,Customer> Accounts
+        private Dictionary<String,List<Account>> repository = new Dictionary<String,List<Account>>();
+        public Dictionary<String,List<Account>> Repository
         {
             get
             {
-                return accounts;
+                return repository;
             }
         }
         public string Name
@@ -22,140 +22,47 @@ namespace BankingApplication
             }
         }
 
-        public Customer CreateNewCustomer(char typeofaccount)
+        public Customer CreateNewCustomer()
         {
             var customer = new Customer();
-            var account = new Account(typeofaccount);
-            accounts.Add(account, customer);
-            System.Console.WriteLine($"Customer added with id {customer.Customer_ID} and A/C id is {account.Account_No}.");
+            repository.Add(customer.Customer_ID,new List<Account>());
+
+            System.Console.WriteLine($"Customer added with id {customer.Customer_ID}.");
             return customer;
         }
 
-        public void CreateNewAcoount(Customer customer, char typeofaccount)
+        public void CreateNewAcoount(String customerid, char typeofaccount)
         {
             var account = new Account(typeofaccount);
-            accounts.Add(account, customer);
-            System.Console.WriteLine($"Account is created with id {account.Account_No} for customer {customer.Customer_ID}.");
-        }
-
-        public void DisplayAllAccountsInABank()
-        {
-            foreach(var account in accounts.Keys)
-            {
-                System.Console.WriteLine(account.Account_No);
-            }
+            repository[customerid].Add(account);
+            System.Console.WriteLine($"Account is created with id {account.Account_No} for customer {customerid}.");
         }
 
         public Account FindAccount(string acno)
         {
-            foreach(var account in accounts.Keys)
+            var result = from accountlist in repository.Values
+                         from account in accountlist
+                         where account.Account_No == acno
+                         select account;
+            
+            if(result.Count() == 0)
             {
-                if(account.Account_No.Equals(acno))
-                    return account;
+                throw new Exception("Account not found!");
             }
-            throw new Exception("Account not found!");
-        }
-
-        public Customer FindCustomer(string custid)
-        {
-            foreach(var customer in accounts.Values)
-            {
-                if(customer.Customer_ID.Equals(custid))
-                    return customer;
-            }
-            throw new Exception("Customer not found!");
+            
+            return result.First();
         }
 
         public void DisplayBalanceForAllAccounts(String custid)
         {
-            var result = from record in accounts
-                         where record.Value.Customer_ID == custid
-                         select (record.Key);
-
-            if(result.Count() == 0)
-                throw new Exception("Customer is not found !");
-
-            foreach(var account in result)
+            if(!repository.Keys.Contains(custid))
+            {
+                throw new Exception("Customer not found!");
+            }
+            foreach(var account in repository[custid])
             {
                 System.Console.WriteLine($"Balance for account {account.Account_No} is {account.Balance}.");
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// using System;
-// using System.Collections.Generic;
-
-// namespace BankingApplication
-// {
-//     public class Bank
-//     {
-//         private List<Customer> customers = new List<Customer>();
-//         private Dictionary<Customer,Account> accounts = new Dictionary<Customer,Account>();
-//         public List<Customer> Customers
-//         {
-//             get
-//             {
-//                 return customers;
-//             }
-//         }
-//         public string Name
-//         {
-//             get
-//             {
-//                 return "Bank of Gujarat";
-//             }
-//         }
-
-//         public Customer CreateNewCustomer()
-//         {
-//             var customer = new Customer();
-//             customers.Add(customer);
-//             System.Console.WriteLine($"Customer added with id {customer.Customer_ID}");
-//             return customer;
-//         }
-
-//         public void DisplayAllAccountsInABank()
-//         {
-//             foreach(var customer in Customers)
-//             {
-//                 customer.GetAllAccountsOfACustomer();
-//             }
-//         }
-
-//         public Account FindAccount(string acno)
-//         {
-//             foreach(var customer in Customers)
-//             {
-//                 foreach(var account in customer.Accounts)
-//                 {
-//                     if(acno.Equals(account.Account_No.ToString()))
-//                         return account;                        
-//                 }
-//             }
-//             return new Account();
-//         }
-
-//         public Customer FindCustomer(string custid)
-//         {
-//             foreach(var customer in Customers)
-//             {
-//                 if(custid.Equals(customer.Customer_ID.ToString()))
-//                     return customer;
-//             }
-//             return new Customer();
-//         }
-//     }
-// }
