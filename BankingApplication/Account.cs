@@ -52,6 +52,9 @@ namespace BankingApplication
 
         public void Credit(int val)
         {
+            if(val < 100)
+                throw new Exception("Amount sholud not be less than 100");
+
             if(val%100 != 0)
                 throw new Exception("Transaction amount should be multiple(s) of 100 !");
 
@@ -81,6 +84,9 @@ namespace BankingApplication
 
         public void Dedit(int val)
         {
+            if(val < 100)
+                throw new Exception("Amount sholud not be less than 100");
+
             if(val%100 != 0)
                 throw new Exception("Transaction amount should be multiple(s) of 100 !");
 
